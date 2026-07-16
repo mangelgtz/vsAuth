@@ -21,7 +21,7 @@ export class GoogleAuthAdapter implements IGoogleAuthPort {
   private readonly client: OAuth2Client;
   private readonly audiences: ReadonlyArray<string>;
 
-  public constructor(private readonly config: GoogleAuthAdapterConfig) {
+  public constructor(config: GoogleAuthAdapterConfig) {
     this.client = new OAuth2Client({
       clientId: config.clientId,
       clientSecret: config.clientSecret,
