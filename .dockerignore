@@ -1,0 +1,35 @@
+# Dependencies (se reinstalan dentro del contenedor)
+node_modules
+npm-debug.log
+
+# Build output (se regenera dentro del contenedor)
+dist
+*.tsbuildinfo
+
+# Env y secretos — JAMAS al build context
+.env
+.env.*
+!.env.example
+
+# Tests y dev
+coverage
+.nyc_output
+.vitest
+__tests__
+*.test.ts
+*.spec.ts
+
+# Tooling local
+.git
+.gitignore
+.github
+.vscode
+.idea
+*.swp
+.DS_Store
+
+# Docs y dev infra (no se necesitan dentro de la imagen)
+README.md
+docker-compose.yml
+Dockerfile
+.dockerignore
