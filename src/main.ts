@@ -99,11 +99,9 @@ async function bootstrap(): Promise<void> {
   process.on('SIGTERM', shutdown);
 
   try {
-    // Bind a '::' (IPv6 any) en lugar de '0.0.0.0'. Node abre el socket en
-    // modo dual-stack, por lo que acepta IPv4 e IPv6 a la vez. Es obligatorio
-    // en plataformas cuya red interna es IPv6 (Railway runtime V2): con
-    // '0.0.0.0' el proceso arranca bien pero el healthcheck nunca lo alcanza.
-    await app.listen({ port: env.PORT, host: '::' });
+    // El healthcheck de Railway sondea por IPv4, por lo que el bind debe ser
+    // '0.0.0.0' (todas las interfaces IPv4) y no '::'.
+    await app.listen({ port: env.PORT, host: '0.0.0.0' });
     app.log.info(`auth-service listening on :${env.PORT}`);
   } catch (err) {
     app.log.error({ err }, 'Failed to start server');
